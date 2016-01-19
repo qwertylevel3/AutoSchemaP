@@ -1,7 +1,28 @@
-@(message: String)
+@(indexModel:IndexModel)
 
-@main("Welcome to Play") {
+@main("index") {
+    <h1>index page</h1>
 
-    @play20.welcome(message, style = "Java")
+    <table border="1">
+        <tr>
+            <th>Ename</th>
+            <th>Cname</th>
+            <th>type</th>
+            <th>showName</th>
+            <th>participle</th>
+            <th>path</th>
+        </tr>
+        @for(item <-indexModel.items){
+            <tr>
+                <td>@item.ename</td>
+                <td>@item.cname</td>
+                <td>@item.dataType</td>
+                <td>@item.showName</td>
+                <td>@item.participle</td>
+                <td>@item.path</td>
+            </tr>
+        }
+    </table>
+
 
 }
