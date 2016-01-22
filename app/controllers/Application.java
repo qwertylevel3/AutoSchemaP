@@ -45,15 +45,19 @@ public class Application extends Controller {
 
 
     public static void init(){
-        readFileByChars("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
+        String content=readFileByChars("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
+        System.out.print(content);
 
     }
 
-    public static void readFileByChars(String fileName) {
+    public static String readFileByChars(String fileName) {
         File file = new File(fileName);
         Reader reader = null;
+
+        String fileContent="";
+
         try {
-            System.out.println("以字符为单位读取文件内容，一次读一个字节：");
+            //System.out.println("以字符为单位读取文件内容，一次读一个字节：");
             // 一次读一个字符
             reader = new InputStreamReader(new FileInputStream(file));
             int tempchar;
@@ -62,13 +66,16 @@ public class Application extends Controller {
                 // 但如果这两个字符分开显示时，会换两次行。
                 // 因此，屏蔽掉\r，或者屏蔽\n。否则，将会多出很多空行。
                 if (((char) tempchar) != '\r') {
-                    System.out.print((char) tempchar);
+                    fileContent+=((char)tempchar);
+
+                    //System.out.print((char) tempchar);
                 }
             }
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return fileContent;
     }
 
 }
