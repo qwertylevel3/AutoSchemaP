@@ -1,28 +1,49 @@
 @(indexModel:IndexModel)
 
 @main("index") {
+
+    <head>
+        <style type="text/css">
+            div#tree {background-color:#ffff99;height:600px;width:400px;float:left;}
+            div#list {background-color:#EEEEEE;height:600px;width:600px;float:left;}
+
+            h1 {margin-bottom:0;background-color:ff44ff;}
+            h2 {margin-bottom:0;font-size:18px;}
+            ul {margin:0;}
+            li {list-style:none;}
+        </style>
+    </head>
     <h1>index page</h1>
 
-    <table border="1">
-        <tr>
-            <th>Ename</th>
-            <th>Cname</th>
-            <th>type</th>
-            <th>showName</th>
-            <th>participle</th>
-            <th>path</th>
-        </tr>
-        @for(item <-indexModel.items){
+    <div id="tree">
+        <h2>this is tree</h2>
+    </div>
+
+
+    <div id="list">
+        <h2>list...</h2>
+         <table border="1">
             <tr>
-                <td>@item.ename</td>
-                <td>@item.cname</td>
-                <td>@item.dataType</td>
-                <td>@item.showName</td>
-                <td>@item.participle</td>
-                <td>@item.path</td>
+                <th>Ename</th>
+                <th>Cname</th>
+                <th>type</th>
+                <th>showName</th>
+                <th>participle</th>
+                <th>path</th>
             </tr>
-        }
-    </table>
+            @helper.form(action=routes.IndexPage.post()){
 
-
+                @for(item <- indexModel.items){
+                    <tr>
+                        <td>@item.ename</td>
+                        <td>@item.cname</td>
+                        <td>@item.dataType</td>
+                        <td>@item.showName</td>
+                        <td>@item.participle</td>
+                        <td>@item.path</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
 }
