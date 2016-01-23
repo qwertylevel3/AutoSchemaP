@@ -41,9 +41,20 @@ public class Application extends Controller {
         return ok(home.render("message"));
     }
 
+    private static void debugTree(XmlTreeNode t){
+        for(int i=0;i<t.getChild().size();i++){
+            System.out.println(t.getChild().get(i).getPath());
+
+            debugTree(t.getChild().get(i));
+        }
+    }
 
     public static void init(){
         XsdAnalyser.getInstance().analyse("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
+
+        XmlTreeNode root=XsdAnalyser.getInstance().getTree();
+
+        debugTree(root);
     }
 
 }

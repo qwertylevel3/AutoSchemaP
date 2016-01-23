@@ -1,11 +1,14 @@
 package controllers;
 
+
+import models.*;
+
 import java.io.*;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import javax.swing.tree.TreeNode;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,12 +18,11 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class XsdAnalyser {
     private static XsdAnalyser p=null;
-    private String xsdFile;
+    private String xsdFile="";
+    private XmlTreeNode root=new XmlTreeNode();
 
     private XsdAnalyser(){
     }
-
-
     public static XsdAnalyser getInstance(){
         if(p == null){
             p=new XsdAnalyser();
@@ -28,23 +30,84 @@ public class XsdAnalyser {
         return p;
     }
 
-    private void analyse(Node node){
+    public XmlTreeNode getTree(){return root;}
+
+    private void handleComplexType(Node node,XmlTreeNode parent){
+        XmlComplexType tempNode=new XmlComplexType();
+        String tempString=node.getAttributes().getNamedItem("name").toString();
+        tempNode.setName(tempString.substring(
+                tempString.indexOf('"')+1,
+                tempString.lastIndexOf('"')
+        ));
+        parent.addChild(tempNode);
+        //System.out.println(tempNode.getName());
+
+        for(int i=0;i<node.getChildNodes().getLength();i++)
+        {
+            analyse(node.getChildNodes().item(i),tempNode);
+        }
+    }
+    private void handleSimpleType(Node node,XmlTreeNode parent){
+        XmlSimpleType tempNode=new XmlSimpleType();
+        String tempString=node.getAttributes().getNamedItem("name").toString();
+        tempNode.setName(tempString.substring(
+                tempString.indexOf('"')+1,
+                tempString.lastIndexOf('"')
+        ));
+        parent.addChild(tempNode);
+        //System.out.println(tempNode.getName());
+
+        for(int i=0;i<node.getChildNodes().getLength();i++)
+        {
+            analyse(node.getChildNodes().item(i),tempNode);
+        }
+    }
+
+    private void handleElement(Node node,XmlTreeNode parent){
+        XmlElement tempNode=new XmlElement();
+        String tempString=node.getAttributes().getNamedItem("name").toString();
+        tempNode.setName(tempString.substring(
+                tempString.indexOf('"')+1,
+                tempString.lastIndexOf('"')
+        ));
+        tempString=node.getAttributes().getNamedItem("id").toString();
+        tempNode.setId(tempString.substring(
+                tempString.indexOf('"')+1,
+                tempString.lastIndexOf('"')
+        ));
+        tempString=node.getAttributes().getNamedItem("type").toString();
+        tempNode.setId(tempString.substring(
+                tempString.indexOf('"')+1,
+                tempString.lastIndexOf('"')
+        ));
+        parent.addChild(tempNode);
+        for(int i=0;i<node.getChildNodes().getLength();i++)
+        {
+            analyse(node.getChildNodes().item(i),tempNode);
+        }
+    }
+
+    private void analyse(Node node, XmlTreeNode parent){
         String nodeName=node.getNodeName();
-        System.out.println(nodeName);
+        //System.out.println(nodeName);
 
         if(nodeName=="xs:complexType"){
-            //System.out.println("conplexType");
+            handleComplexType(node,parent);
         }
-        if(nodeName=="xs:simpleType"){
-            //System.out.println("simpleType");
+        else if(nodeName=="xs:simpleType"){
+            handleSimpleType(node, parent);
         }
-        if(nodeName=="xs:element"){
-            //System.out.println("element");
+        else if(nodeName=="xs:element"){
+            handleElement(node, parent);
+        }else{
+            for(int i=0;i<node.getChildNodes().getLength();i++){
+                analyse(node.getChildNodes().item(i),parent);
+            }
         }
 
     }
 
-    public Boolean analyse(String filename){
+    public void analyse(String filename){
         xsdFile=readFileByChars(filename);
 
         DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
@@ -58,26 +121,26 @@ public class XsdAnalyser {
             //in.read(b);    //读取文件中的内容到b[]数组
 
             Document doc = builder.parse(in);
-
             Element r = doc.getDocumentElement();
-
             System.out.println(r.getTagName());
-
             NodeList nodeList=r.getChildNodes();
-
 
             //第一层解析
             for(int i=0;i<nodeList.getLength();i++)
             {
                 //非根
                 if(nodeList.item(i).getNodeName()!="xs:element"){
-                    analyse(nodeList.item(i));
+                    analyse(nodeList.item(i),root);
                 } else{
-                    //TODO
+                    //单独处理根
+                    String tempString=nodeList.item(i).getAttributes().getNamedItem("name").toString();
+                    root.setName(tempString.substring(
+                            tempString.indexOf('"')+1,
+                            tempString.lastIndexOf('"')
+                    ));
                 }
-
-
             }
+            setTreeNodePath(root);
 
         }  catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -88,8 +151,14 @@ public class XsdAnalyser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        return true;
+    private void setTreeNodePath(XmlTreeNode t){
+        t.setPath();
+        for(int i=0;i<t.getChild().size();i++)
+        {
+            setTreeNodePath(t.getChild().get(i));
+        }
     }
 
     public String readFileByChars(String fileName) {

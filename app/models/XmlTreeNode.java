@@ -7,7 +7,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeNode {
+public class XmlTreeNode {
 
     //get....
     public String getName(){
@@ -19,10 +19,10 @@ public class TreeNode {
     public List<String> getAnnotation(){
         return annotation;
     }
-    public TreeNode getParent(){
+    public XmlTreeNode getParent(){
         return parent;
     }
-    public List<TreeNode> getChild(){
+    public List<XmlTreeNode> getChild(){
         return child;
     }
 
@@ -34,10 +34,10 @@ public class TreeNode {
     public void setPath(String p){
         path=p;
     }
-    public void setParent(TreeNode p){
+    public void setParent(XmlTreeNode p){
         parent=p;
     }
-    public void addChild(TreeNode p){
+    public void addChild(XmlTreeNode p){
         p.setParent(this);
         child.add(p);
     }
@@ -46,7 +46,7 @@ public class TreeNode {
     }
 
 
-    public String setPath(TreeNode par){
+    public String setPath(XmlTreeNode par){
         String temp="";
         if(par!=null){
             temp=setPath(par.getParent());
@@ -62,7 +62,7 @@ public class TreeNode {
     }
 
     //把a复制到b
-    public void copy(TreeNode a,TreeNode b){
+    public void copy(XmlTreeNode a, XmlTreeNode b){
 
         b.setName(a.getName());
         b.setPath(a.getPath());
@@ -72,15 +72,15 @@ public class TreeNode {
         }
         for(int i=0;i<a.getChild().size();i++)
         {
-            TreeNode t=a.getChild().get(i).clone();
+            XmlTreeNode t=a.getChild().get(i).clone();
 
             b.addChild(t);
         }
     }
 
     //clone root
-    public TreeNode clone(){
-        TreeNode root=new TreeNode();
+    public XmlTreeNode clone(){
+        XmlTreeNode root=new XmlTreeNode();
 
         copy(this,root);
 
@@ -90,8 +90,8 @@ public class TreeNode {
 
 
 
-    protected TreeNode parent=null;
-    protected List<TreeNode> child=new ArrayList<>();
+    protected XmlTreeNode parent=null;
+    protected List<XmlTreeNode> child=new ArrayList<>();
 
 
     protected String name=new String("");
