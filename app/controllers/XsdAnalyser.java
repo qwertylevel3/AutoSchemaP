@@ -1,9 +1,14 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
+
+import com.sun.xml.internal.bind.v2.TODO;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Created by qwertylevel3 on 16-1-22.
@@ -13,14 +18,78 @@ public class XsdAnalyser {
     private String xsdFile;
 
     private XsdAnalyser(){
-        xsdFile=readFileByChars("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
     }
+
 
     public static XsdAnalyser getInstance(){
         if(p == null){
             p=new XsdAnalyser();
         }
         return p;
+    }
+
+    private void analyse(Node node){
+        String nodeName=node.getNodeName();
+        System.out.println(nodeName);
+
+        if(nodeName=="xs:complexType"){
+            //System.out.println("conplexType");
+        }
+        if(nodeName=="xs:simpleType"){
+            //System.out.println("simpleType");
+        }
+        if(nodeName=="xs:element"){
+            //System.out.println("element");
+        }
+
+    }
+
+    public Boolean analyse(String filename){
+        xsdFile=readFileByChars(filename);
+
+        DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+
+        try{
+            DocumentBuilder builder = dbf.newDocumentBuilder();
+
+            File f = new File(filename);
+            InputStream in = new FileInputStream(f);
+            //byte b[]=new byte[(int)f.length()];     //创建合适文件大小的数组
+            //in.read(b);    //读取文件中的内容到b[]数组
+
+            Document doc = builder.parse(in);
+
+            Element r = doc.getDocumentElement();
+
+            System.out.println(r.getTagName());
+
+            NodeList nodeList=r.getChildNodes();
+
+
+            //第一层解析
+            for(int i=0;i<nodeList.getLength();i++)
+            {
+                //非根
+                if(nodeList.item(i).getNodeName()!="xs:element"){
+                    analyse(nodeList.item(i));
+                } else{
+                    //TODO
+                }
+
+
+            }
+
+        }  catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     public String readFileByChars(String fileName) {

@@ -61,24 +61,29 @@ public class TreeNode {
         }
     }
 
+    //把a复制到b
+    public void copy(TreeNode a,TreeNode b){
+
+        b.setName(a.getName());
+        b.setPath(a.getPath());
+        for(int i=0;i<a.getAnnotation().size();i++)
+        {
+            b.addAnnotation(a.getAnnotation().get(i));
+        }
+        for(int i=0;i<a.getChild().size();i++)
+        {
+            TreeNode t=a.getChild().get(i).clone();
+
+            b.addChild(t);
+        }
+    }
 
     //clone root
     public TreeNode clone(){
         TreeNode root=new TreeNode();
 
-        root.setName(this.getName());
-        root.setPath(this.getPath());
-        for(int i=0;i<annotation.size();i++)
-        {
-            root.addAnnotation(this.getAnnotation().get(i));
-        }
-        for(int i=0;i<child.size();i++)
-        {
-            TreeNode t=child.get(i).clone();
+        copy(this,root);
 
-            root.addChild(t);
-
-        }
         return root;
     }
 
