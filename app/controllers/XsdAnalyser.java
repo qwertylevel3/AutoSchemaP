@@ -10,10 +10,10 @@ import java.io.Reader;
  */
 public class XsdAnalyser {
     private static XsdAnalyser p=null;
+    private String xsdFile;
 
     private XsdAnalyser(){
-        String content=readFileByChars("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
-        System.out.print(content);
+        xsdFile=readFileByChars("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
     }
 
     public static XsdAnalyser getInstance(){
