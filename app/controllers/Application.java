@@ -54,7 +54,6 @@ public class Application extends Controller {
 
         XmlTreeNode root=XsdAnalyser.getInstance().getTree();
 
-        debugTree(root);
+        //debugTree(root);
     }
-
 }

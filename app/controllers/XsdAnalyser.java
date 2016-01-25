@@ -104,7 +104,6 @@ public class XsdAnalyser {
                 analyse(node.getChildNodes().item(i),parent);
             }
         }
-
     }
 
     public void analyse(String filename){
