@@ -285,9 +285,12 @@ dTree.prototype.node = function(node, nodeId) {
 
 	}
 
-	else if ((!this.config.folderLinks || !node.url) && node._hc && node.pid != this.root.id)
+	else if ((!this.config.folderLinks || !node.url) && node._hc && node.pid != this.root.id){
 
 		str += '<a href="javascript: ' + this.obj + '.o(' + nodeId + ');" class="node">';
+	}
+
+
 	
 	
 

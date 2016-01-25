@@ -1,39 +1,42 @@
-@()
+@(analyser:XsdAnalyser)
 
-<!DOCTYPE html>
+@main("tree"){
 
-<html>
-<head>
-	<title>Destroydrop &raquo; Javascripts &raquo; Tree</title>
+	<head>
+		<title>Destroydrop &raquo; Javascripts &raquo; Tree</title>
 
-	<link rel="StyleSheet" href="@routes.Assets.at("stypesheets/dtree.css")"  type="text/css" />
-	<script type="text/javascript" src="@routes.Assets.at("javascripts/dtree.js")"></script>
+		<link rel="StyleSheet" href="@routes.Assets.at("stylesheets/dtree.css")"  type="text/css" />
+		<script type="text/javascript" src="@routes.Assets.at("javascripts/dtree.js")"></script>
 
-</head>
+	</head>
 
-<body>
+	<body>
 
-<h2>Example</h2>
+		<h2>Example</h2>
 
-<div class="dtree">
+		<div class="dtree">
 
-    <p><a href="javascript: d.openAll();">open all</a> | <a href="javascript: d.closeAll();">close all</a></p>
+    		<p><a href="javascript: d.openAll();">open all</a> | <a href="javascript: d.closeAll();">close all</a></p>
 
-    <script type="text/javascript">
+    		<script type="text/javascript">
 
-		d = new dTree('d');
+				d = new dTree('d');
 
-		d.add(0,-1,'root','root','root','root');
-		d.add(1,0,'节点1','node1','complexType','MeteData');
-		d.add(2,1,'fads','fadsf','element','data');
+				d.add(0,-1,'root','root','root','root');
 
-		document.write(d);
+				count=0;
 
-	</script>
+				@for(i <- 1 to XsdAnalyser.allNode.size()-1){
+					d.add(@XsdAnalyser.allNode.get(i).treeNodeIndex,
+							@XsdAnalyser.allNode.get(i).parent.treeNodeIndex,
+							'','',
+						'@XsdAnalyser.allNode.get(i).nodeType',
+						'@XsdAnalyser.allNode.get(i).name'
+					)
+				}
+				document.write(d);
 
-</div>
-
-
-</body>
-
-</html>
+			</script>
+		</div>
+	</body>
+}

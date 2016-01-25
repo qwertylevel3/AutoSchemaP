@@ -10,6 +10,8 @@ import java.util.List;
 public class XmlTreeNode {
 
     //get....
+    public String getNodeType(){return nodeType;}
+    public Integer getTreeNodeIndex(){return treeNodeIndex;}
     public String getName(){
         return name;
     }
@@ -28,6 +30,8 @@ public class XmlTreeNode {
 
 
     //set...
+    public void setNodeType(String t){nodeType=t;}
+    public void setTreeNodeIndex(Integer i){treeNodeIndex=i;}
     public void setName(String n){
         name=n;
     }
@@ -88,13 +92,15 @@ public class XmlTreeNode {
     }
 
 
+    public Integer treeNodeIndex=0;
 
-
-    protected XmlTreeNode parent=null;
+    public XmlTreeNode parent=null;
     protected List<XmlTreeNode> child=new ArrayList<>();
 
 
-    protected String name=new String("");
+    public String name=new String("");
     protected List<String> annotation=new ArrayList<>();
     protected String path=new String("");
+
+    public String nodeType=new String("");
 }

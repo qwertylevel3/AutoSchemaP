@@ -43,7 +43,7 @@ public class Application extends Controller {
 
     private static void debugTree(XmlTreeNode t){
         for(int i=0;i<t.getChild().size();i++){
-            System.out.println(t.getChild().get(i).getPath());
+            System.out.println(t.getChild().get(i).getTreeNodeIndex());
 
             debugTree(t.getChild().get(i));
         }

@@ -4,10 +4,15 @@ package controllers;
 import models.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.tree.TreeNode;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,8 +23,11 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class XsdAnalyser {
     private static XsdAnalyser p=null;
-    private String xsdFile="";
+    public String xsdFile="";
     private XmlTreeNode root=new XmlTreeNode();
+
+//    public static Map<Integer,XmlTreeNode> nodeMap=new HashMap<>();
+    public static List<XmlTreeNode> allNode=new ArrayList<>();
 
     private XsdAnalyser(){
     }
@@ -30,6 +38,9 @@ public class XsdAnalyser {
         return p;
     }
 
+    private static Integer treeNodeIndex=0;
+    public static List<XmlTreeNode> nodeList=new ArrayList<>();
+
     public XmlTreeNode getTree(){return root;}
 
     private void handleComplexType(Node node,XmlTreeNode parent){
@@ -39,6 +50,9 @@ public class XsdAnalyser {
                 tempString.indexOf('"')+1,
                 tempString.lastIndexOf('"')
         ));
+        tempNode.setTreeNodeIndex(treeNodeIndex++);
+        tempNode.setNodeType("complexType");
+        //allNode.add(treeNodeIndex-1,tempNode);
         parent.addChild(tempNode);
         //System.out.println(tempNode.getName());
 
@@ -54,6 +68,9 @@ public class XsdAnalyser {
                 tempString.indexOf('"')+1,
                 tempString.lastIndexOf('"')
         ));
+        tempNode.setTreeNodeIndex(treeNodeIndex++);
+        tempNode.setNodeType("simpleType");
+        //allNode.add(treeNodeIndex-1,tempNode);
         parent.addChild(tempNode);
         //System.out.println(tempNode.getName());
 
@@ -80,6 +97,9 @@ public class XsdAnalyser {
                 tempString.indexOf('"')+1,
                 tempString.lastIndexOf('"')
         ));
+        tempNode.setTreeNodeIndex(treeNodeIndex++);
+        tempNode.setNodeType("element");
+        //allNode.add(treeNodeIndex-1,tempNode);
         parent.addChild(tempNode);
         for(int i=0;i<node.getChildNodes().getLength();i++)
         {
@@ -107,6 +127,11 @@ public class XsdAnalyser {
     }
 
     public void analyse(String filename){
+
+        allNode.clear();
+
+        treeNodeIndex=1;
+
         xsdFile=readFileByChars(filename);
 
         DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
@@ -137,9 +162,12 @@ public class XsdAnalyser {
                             tempString.indexOf('"')+1,
                             tempString.lastIndexOf('"')
                     ));
+                    root.setTreeNodeIndex(0);
+                    allNode.add(0,root);
                 }
             }
             setTreeNodePath(root);
+            createNodeList(root);
 
         }  catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -160,6 +188,29 @@ public class XsdAnalyser {
         }
     }
 
+    private void createNodeList(XmlTreeNode t){
+        for(int i=0;i<t.getChild().size();i++){
+            //System.out.println(t.getChild().get(i).getTreeNodeIndex());
+            allNode.add(t.getChild().get(i));
+
+            createNodeList(t.getChild().get(i));
+        }
+    }
+
+    public void debug(){
+        for(int i=0;i<allNode.size();i++){
+            System.out.println(allNode.get(i).getName());
+        }
+        System.out.println(allNode.size());
+        //debugTree(root);
+    }
+    private void debugTree(XmlTreeNode t){
+        for(int i=0;i<t.getChild().size();i++){
+            System.out.println(t.getChild().get(i).getTreeNodeIndex());
+
+            debugTree(t.getChild().get(i));
+        }
+    }
     public String readFileByChars(String fileName) {
         File file = new File(fileName);
         Reader reader = null;
