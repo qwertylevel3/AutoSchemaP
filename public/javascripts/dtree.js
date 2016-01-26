@@ -304,7 +304,8 @@ dTree.prototype.node = function(node, nodeId) {
 	//?????
 	//id?????node?id
 	if(node.isCheckable==true){
-		str+='<input type="checkbox" id=node.id>'
+		str+='<input type="checkbox" name='+node.id+'>';
+		//str+='@helper.checkbox(treeForm("formList.get(node.id)"))'
 	}
 
 	if (node.url || ((!this.config.folderLinks || !node.url) && node._hc)) str += '</a>';

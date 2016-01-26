@@ -1,4 +1,4 @@
-@(analyser:XsdAnalyser)
+@(analyser:XsdAnalyser)(form:Form[TreeForm])
 
 @main("tree"){
 
@@ -17,8 +17,8 @@
 		<div class="dtree">
 
     		<p><a href="javascript: d.openAll();">open all</a> | <a href="javascript: d.closeAll();">close all</a></p>
-
-    		<script type="text/javascript">
+			@helper.form(action=routes.TreePage.post()){
+				<script type="text/javascript">
 
 				d = new dTree('d');
 
@@ -36,7 +36,11 @@
 				}
 				document.write(d);
 
-			</script>
+				</script>
+				<input type="submit" name="send" value="Feed"/>
+			}
+
+
 		</div>
 	</body>
 }

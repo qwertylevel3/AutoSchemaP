@@ -129,6 +129,7 @@ public class XsdAnalyser {
     public void analyse(String filename){
 
         allNode.clear();
+        root=new XmlTreeNode();
 
         treeNodeIndex=1;
 
