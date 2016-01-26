@@ -93,7 +93,7 @@ public class XsdAnalyser {
                 tempString.lastIndexOf('"')
         ));
         tempString=node.getAttributes().getNamedItem("type").toString();
-        tempNode.setId(tempString.substring(
+        tempNode.setType(tempString.substring(
                 tempString.indexOf('"')+1,
                 tempString.lastIndexOf('"')
         ));

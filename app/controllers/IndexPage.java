@@ -2,6 +2,8 @@ package controllers;
 
 import models.IndexItem;
 import models.IndexModel;
+import models.XmlElement;
+import models.XmlTreeNode;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -14,25 +16,22 @@ public class IndexPage extends Controller{
 
     static Form<IndexModel> indexForm =Form.form(IndexModel.class);
 
-    public static Result index() {
-        IndexItem item1=new IndexItem();
-        item1.cname="aaa";
-        item1.ename="eee";
-        item1.dataType=3;
-        item1.participle=false;
-        item1.path="/afdsaf";
-        item1.showName="gggg";
-        IndexItem item2=new IndexItem();
-        item2.cname="aaa";
-        item2.ename="eee";
-        item2.dataType=3;
-        item2.participle=false;
-        item2.path="/afdsaf";
-        item2.showName="gggg";
+    public static Result show() {
+
         IndexModel indexModel= new IndexModel();
 
-        indexModel.items.add(item1);
-        indexModel.items.add(item2);
+        for(String index:request().queryString().keySet()){
+            if(!index.equals("send")){
+                XmlTreeNode t=XsdAnalyser.allNode.get(Integer.parseInt(index));
+                IndexItem tempItem=new IndexItem();
+                tempItem.cname=t.getId();
+                tempItem.ename=t.getName();
+                tempItem.path=t.getPath();
+
+                indexModel.items.add(tempItem);
+
+            }
+        }
 
         return ok(index.render(indexModel));
     }

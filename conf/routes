@@ -10,7 +10,7 @@ GET     /tree                       controllers.TreePage.show()
 GET     /tree/post                  controllers.TreePage.post()
 
 #index
-GET     /index                      controllers.IndexPage.index()
+GET     /index                      controllers.IndexPage.show()
 GET     /index/post                 controllers.IndexPage.post()
 
 

@@ -27,6 +27,11 @@ public class XmlTreeNode {
     public List<XmlTreeNode> getChild(){
         return child;
     }
+    public String getId(){return "";}
+    public String getType(){ return "";}
+
+    public void setId(String i){}
+    public void setType(String t){}
 
 
     //set...
