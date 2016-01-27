@@ -3,7 +3,6 @@
 @main("showDetail"){
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
-        <title>简洁Tab</title>
         <style type="text/css">
             <!--
             body,div,ul,li{
@@ -124,8 +123,12 @@
             <div class="Contentbox">
                 @for(i <- 0 until showDetailModel.tables.size()){
 
+
                     @if(i==0){
                         <div id="con_one_@(i+1)" class="hover">
+                        @helper.form(action=routes.ShowDetailPage.chooseItem()){
+                            <input type="submit" name="@i" value="chooseItem">
+                        }
                         <table border="1">
                             <tr>
                                 <th>
@@ -149,6 +152,9 @@
                         </div>
                     }else{
                         <div id="con_one_@(i+1)" style="display:none">
+                        @helper.form(action=routes.ShowDetailPage.chooseItem()){
+                            <input type="submit" name="@i" value="chooseItem">
+                        }
                         <table border="1">
                             <tr>
                                 <th>
@@ -175,6 +181,8 @@
                     }
                 }
             </div>
+
+
         </div>
     </div>
 }

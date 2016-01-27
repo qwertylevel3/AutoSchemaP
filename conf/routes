@@ -21,7 +21,8 @@ GET     /result/post                controllers.ResultPage.post()
 GET     /showDetail                 controllers.ShowDetailPage.show()
 GET     /showDetail/post            controllers.ShowDetailPage.post()
 GET     /showDetail/addTable        controllers.ShowDetailPage.addTable()
-
+GET     /showDetail/chooseItem      controllers.ShowDetailPage.chooseItem()
+GET     /showDetail/addItem         controllers.ShowDetailPage.addItem()
 
 
 # Map static resources from the /public folder to the /assets URL path

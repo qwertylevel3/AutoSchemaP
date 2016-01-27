@@ -1,13 +1,13 @@
 package controllers;
 
-import models.ShowDetailItem;
-import models.ShowDetailModel;
-import models.ShowDetailTable;
+import models.*;
 import play.api.libs.iteratee.Enumeratee;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.debugView;
 import views.html.showDetail;
+import views.html.showDetailTree;
 
 import java.util.Map;
 
@@ -17,7 +17,8 @@ import java.util.Map;
 public class ShowDetailPage extends Controller{
 
     static ShowDetailModel showDetailModel=new ShowDetailModel();
-
+    static Form<TreeForm> treeForm=Form.form(TreeForm.class);
+    static public Integer cur=0;
     public static Result show(){
         showDetailModel=new ShowDetailModel();
 
@@ -64,12 +65,59 @@ public class ShowDetailPage extends Controller{
             ShowDetailTable table=new ShowDetailTable();
             if(n.length!=0 && n[0].length()!=0){
                 table.tableName=n[0];
+
+                showDetailModel.tables.add(table);
             }else{
                 return ok(debugView.render("error"));
             }
-            showDetailModel.tables.add(table);
         }else if(m.containsKey("delete")){
+            String[] n=m.get("tableName");
+            if(n.length==0 || n[0].length()==0){
+                return ok(debugView.render("error"));
+            }
+            for(int i=0;i<showDetailModel.tables.size();i++){
+                if(showDetailModel.tables.get(i).tableName.equals(n[0])){
+                    showDetailModel.tables.remove(i);
+                }
+            }
+        }
+        return ok(showDetail.render(showDetailModel));
+    }
 
+    public static boolean isNumeric(String str){
+        for (int i = 0; i < str.length(); i++){
+            System.out.println(str.charAt(i));
+            if (!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static Result chooseItem(){
+        Map<String,String[]> m=request().queryString();
+
+        for(String k:m.keySet()){
+            if(isNumeric(k)){
+                int tableIndex=Integer.parseInt(k);
+                cur=tableIndex;
+            }
+        }
+        return ok(showDetailTree.render(XsdAnalyser.getInstance(),treeForm));
+    }
+    public static Result addItem(){
+        ShowDetailTable temptable=showDetailModel.tables.get(cur);
+
+        for(String index:request().queryString().keySet()){
+            if(!index.equals("send")){
+                XmlTreeNode t=XsdAnalyser.allNode.get(Integer.parseInt(index));
+                ShowDetailItem tempItem=new ShowDetailItem();
+
+                tempItem.name=t.getId();
+                tempItem.path=t.getPath();
+
+                temptable.items.add(tempItem);
+            }
         }
         return ok(showDetail.render(showDetailModel));
     }

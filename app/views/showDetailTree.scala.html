@@ -1,0 +1,44 @@
+@(analyser:XsdAnalyser)(form:Form[TreeForm])
+
+@main("tree"){
+
+<head>
+    <title>Destroydrop &raquo; Javascripts &raquo; Tree</title>
+
+    <link rel="StyleSheet" href="@routes.Assets.at("stylesheets/dtree.css")"  type="text/css" />
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/dtree.js")"></script>
+
+	</head>
+
+	<body>
+
+		<h2>Example</h2>
+
+		<div class="dtree">
+
+    		<p><a href="javascript: d.openAll();">open all</a> | <a href="javascript: d.closeAll();">close all</a></p>
+			@helper.form(action=routes.ShowDetailPage.addItem()){
+				<script type="text/javascript">
+
+				d = new dTree('d');
+
+				d.add(0,-1,'root','root','root','root');
+
+				count=0;
+
+				@for(i <- 1 to XsdAnalyser.allNode.size()-1){
+					d.add(@XsdAnalyser.allNode.get(i).treeNodeIndex,
+							@XsdAnalyser.allNode.get(i).parent.treeNodeIndex,
+							'','',
+						'@XsdAnalyser.allNode.get(i).nodeType',
+						'@XsdAnalyser.allNode.get(i).name'
+					)
+				}
+				document.write(d);
+
+				</script>
+                <input type="submit" name="send" value="Feed"/>
+            }
+        </div>
+    </body>
+    }
