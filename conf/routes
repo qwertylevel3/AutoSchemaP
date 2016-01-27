@@ -19,7 +19,8 @@ GET     /result/post                controllers.ResultPage.post()
 
 #showDetail
 GET     /showDetail                 controllers.ShowDetailPage.show()
-GET     /showDetail                 controllers.ShowDetailPage.post()
+GET     /showDetail/post            controllers.ShowDetailPage.post()
+GET     /showDetail/addTable        controllers.ShowDetailPage.addTable()
 
 
 

@@ -21,6 +21,7 @@ public class ResultPage extends Controller{
 
         IndexModel m=IndexPage.indexModel;
 
+
         for(int i=0;i<m.items.size();i++) {
             ResultItem tempItem = new ResultItem();
             tempItem.treeNodeIndex = m.items.get(i).treeNodeIndex;
@@ -91,8 +92,7 @@ public class ResultPage extends Controller{
             }
         }
 
-
-        return ok(debugView.render("ok"));
+        return redirect(routes.ShowDetailPage.show());
     }
 
 }

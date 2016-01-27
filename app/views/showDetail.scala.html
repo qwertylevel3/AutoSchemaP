@@ -1,0 +1,180 @@
+@(showDetailModel:ShowDetailModel)
+
+@main("showDetail"){
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+        <title>简洁Tab</title>
+        <style type="text/css">
+            <!--
+            body,div,ul,li{
+            padding:0;
+            text-align:center;
+            }
+            body{
+            font:12px "宋体";
+            text-align:center;
+            }
+            a:link{
+            color:#00F;
+            text-decoration:none;
+            }
+            a:visited {
+            color: #00F;
+            text-decoration:none;
+            }
+            a:hover {
+            color: #c00;
+            text-decoration:underline;
+            }
+            ul{ list-style:none;}
+            /*选项卡1*/
+            #Tab1{
+            width:460px;
+            margin:0px;
+            padding:0px;
+            margin:0 auto;}
+            /*选项卡2*/
+            #Tab2{
+            width:576px;
+            margin:0px;
+            padding:0px;
+            margin:0 auto;}
+            /*菜单class*/
+            .Menubox {
+            width:100%;
+            background:url(http://www.jb51.net/upload/small/20079299441652.gif);
+            height:28px;
+            line-height:28px;
+            }
+            .Menubox ul{
+            margin:0px;
+            padding:0px;
+            }
+            .Menubox li{
+            float:left;
+            display:block;
+            cursor:pointer;
+            width:114px;
+            text-align:center;
+            color:#949694;
+            font-weight:bold;
+            }
+            .Menubox li.hover{
+            padding:0px;
+            background:#fff;
+            width:116px;
+            border-left:1px solid #A8C29F;
+            border-top:1px solid #A8C29F;
+            border-right:1px solid #A8C29F;
+            background:url(http://www.jb51.net/upload/small/200792994426548.gif);
+            color:#739242;
+            font-weight:bold;
+            height:27px;
+            line-height:27px;
+            }
+            .Contentbox{
+            clear:both;
+            margin-top:0px;
+            border:1px solid #A8C29F;
+            border-top:none;
+            height:181px;
+            text-align:center;
+            padding-top:8px;
+            }
+            -->
+        </style>
+        <script>
+        function setTab(name,cursel,n){
+            for(i=1;i<=n;i++){
+                var menu=document.getElementById(name+i);
+                var con=document.getElementById("con_"+name+"_"+i);
+                menu.className=i==cursel?"hover":"";
+                con.style.display=i==cursel?"block":"none";
+            }
+        }
+        </script>
+    </head>
+
+    <h1>showdetail page</h1>
+    <div id="addTable">
+        @helper.form(action=routes.ShowDetailPage.addTable()){
+            <input type="text" name="tableName">
+            <input type="submit" name="add" value="add">
+            <input type="submit" name="delete" value="delete">
+        }
+    </div>
+    <div id="tables">
+        <div id="Tab1">
+            <div class="Menubox">
+                <ul>
+
+                    @for(i <- 0 until showDetailModel.tables.size()){
+                        @if(i==0){
+                            <li id="one@(i+1)" onClick="setTab('one',@i+1,@showDetailModel.tables.size())" class="hover">
+                                @showDetailModel.tables.get(i).tableName;
+                            </li>
+                        }else{
+                            <li id="one@(i+1)" onClick="setTab('one',@i+1,@showDetailModel.tables.size())" >
+                                @showDetailModel.tables.get(i).tableName;
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="Contentbox">
+                @for(i <- 0 until showDetailModel.tables.size()){
+
+                    @if(i==0){
+                        <div id="con_one_@(i+1)" class="hover">
+                        <table border="1">
+                            <tr>
+                                <th>
+                                    showName
+                                </th>
+                                <th>
+                                    path
+                                </th>
+                            </tr>
+                            @for(j <- 0 until showDetailModel.tables.get(i).items.size()){
+                                <tr>
+                                    <td>
+                                        @showDetailModel.tables.get(i).items.get(j).name
+                                    </td>
+                                    <td>
+                                        @showDetailModel.tables.get(i).items.get(j).path
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        </div>
+                    }else{
+                        <div id="con_one_@(i+1)" style="display:none">
+                        <table border="1">
+                            <tr>
+                                <th>
+                                    showName
+                                </th>
+                                <th>
+                                    path
+                                </th>
+                            </tr>
+
+                            @for(j <- 0 until showDetailModel.tables.get(i).items.size()){
+
+                                 <tr>
+                                    <td>
+                                        @showDetailModel.tables.get(i).items.get(j).name
+                                    </td>
+                                    <td>
+                                        @showDetailModel.tables.get(i).items.get(j).path
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
