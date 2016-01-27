@@ -8,6 +8,8 @@ import play.mvc.Result;
 import views.html.debugView;
 import views.html.result;
 
+import java.util.Map;
+
 /**
  * Created by qwertylevel3 on 16-1-27.
  */
@@ -55,40 +57,40 @@ public class ResultPage extends Controller{
         //        ).getName());
         //    }
         //}
-//        Map<String ,String[]> m=request().queryString();
+        Map<String ,String[]> m=request().queryString();
 //        String[] textList=m.get("text");
 //        for(int i=0;i<textList.length;i++){
 //            indexModel.items.get(i).showName=textList[i];
 //        }
 //
-//        String[] selectList=m.get("select");
-//        for(int i=0;i<selectList.length;i++){
-//            String temp=selectList[i];
-//            if(temp.equals("0:org")){
-//                indexModel.items.get(i).dataType=0;
-//            }else if(temp.equals("1:String")){
-//                indexModel.items.get(i).dataType=1;
-//            }else if(temp.equals("2:Integer")){
-//                indexModel.items.get(i).dataType=2;
-//            }else if(temp.equals("3:double")){
-//                indexModel.items.get(i).dataType=3;
-//            }else if(temp.equals("4:date")){
-//                indexModel.items.get(i).dataType=4;
-//            }
-//        }
-//        for(String k:m.keySet()){
-//            if(isNumeric(k)){
-//                int nodeIndex=Integer.parseInt(k);
-//                for(int i=0;i<indexModel.items.size();i++)
-//                {
-//                    if(nodeIndex==indexModel.items.get(i).treeNodeIndex){
-//                        indexModel.items.get(i).participle=true;
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//
+        String[] selectList=m.get("select");
+        for(int i=0;i<selectList.length;i++){
+            String temp=selectList[i];
+            if(temp.equals("0:其他项")){
+                resultModel.items.get(i).showDetailType=0;
+            }else if(temp.equals("1:标题显示")){
+                resultModel.items.get(i).showDetailType=1;
+            }else if(temp.equals("2:联系方式")){
+                resultModel.items.get(i).showDetailType=2;
+            }else if(temp.equals("3:块视图")){
+                resultModel.items.get(i).showDetailType=3;
+            }else if(temp.equals("4:在线地址")){
+                resultModel.items.get(i).showDetailType=4;
+            }
+        }
+        for(String k:m.keySet()){
+            if(isNumeric(k)){
+                int nodeIndex=Integer.parseInt(k);
+                for(int i=0;i<resultModel.items.size();i++)
+                {
+                    if(nodeIndex==resultModel.items.get(i).treeNodeIndex){
+                        resultModel.items.get(i).chosen=true;
+                        break;
+                    }
+                }
+            }
+        }
+
 
         return ok(debugView.render("ok"));
     }
