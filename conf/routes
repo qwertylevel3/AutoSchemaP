@@ -13,6 +13,14 @@ GET     /tree/post                  controllers.TreePage.post()
 GET     /index                      controllers.IndexPage.show()
 GET     /index/post                 controllers.IndexPage.post()
 
+#result
+GET     /result                     controllers.ResultPage.show()
+GET     /result/post                controllers.ResultPage.post()
+
+#showDetail
+GET     /showDetail                 controllers.ShowDetailPage.show()
+GET     /showDetail                 controllers.ShowDetailPage.post()
+
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -19,7 +19,8 @@ public class IndexPage extends Controller{
 
     static Form<IndexModel> indexForm =Form.form(IndexModel.class);
 
-    static IndexModel indexModel= new IndexModel();
+    public static IndexModel indexModel= new IndexModel();
+
 
     public static Result show() {
         indexModel=new IndexModel();
@@ -101,7 +102,8 @@ public class IndexPage extends Controller{
         }
 
 
-        return ok(debugView.render("ok"));
+        //return ok(debugView.render("ok"));
+        return redirect(routes.ResultPage.show());
     }
 
 }
