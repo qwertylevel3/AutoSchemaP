@@ -22,23 +22,24 @@
                         <td>@item.ename</td>
                         <td>@item.cname</td>
                         <td>
-                            <select>
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select name="select">
+                                <option>0:org</option>
+                                <option>1:String</option>
+                                <option>2:Integer</option>
+                                <option>3:double</option>
+                                <option>4:date</option>
                             </select>
                         </td>
                         <td>
-                            <input type="text">
+                            <input type="text" name="text">
                         </td>
                         <td>
-                            <input type="checkbox">
+                            <input type="checkbox" name=@item.treeNodeIndex>
                         </td>
                         <td>@item.path</td>
                     </tr>
                 }
+            	<input type="submit" name="send" value="Feed"/>
             }
         </table>
     </div>
