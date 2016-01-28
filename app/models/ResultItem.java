@@ -8,5 +8,6 @@ public class ResultItem {
     public Integer treeNodeIndex;
     public String indexName;
     public String showName;
+    public Integer indexType;
     public Integer showDetailType;
 }

@@ -185,4 +185,7 @@
 
         </div>
     </div>
+    @helper.form(action=routes.Application.createXml()){
+        <input type="submit" name="complete" value="complete">
+    }
 }

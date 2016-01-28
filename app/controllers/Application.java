@@ -56,4 +56,17 @@ public class Application extends Controller {
 
         //debugTree(root);
     }
+
+    public static Result createXml(){
+        String prefix="/home/qwertylevel3/";
+        String fileName="testFile";
+        new File(prefix+fileName).mkdirs();
+
+
+        IndexPage.createXml(prefix+fileName+"/index");
+        ResultPage.createXml(prefix+fileName+"/result");
+        ShowDetailPage.createXml(prefix+fileName+"/showDetail");
+
+        return ok(debugView.render("ok"));
+    }
 }
