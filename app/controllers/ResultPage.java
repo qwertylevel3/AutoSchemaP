@@ -27,6 +27,9 @@ import java.util.Map;
 public class ResultPage extends Controller{
     static ResultModel resultModel=new ResultModel();
 
+    public static Result showAgain(){
+        return ok(result.render(resultModel));
+    }
     public static Result show(){
         resultModel=new ResultModel();
 

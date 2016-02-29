@@ -30,6 +30,9 @@ public class IndexPage extends Controller {
     public static IndexModel indexModel = new IndexModel();
 
 
+    public static Result showAgain(){
+        return ok(index.render(indexModel));
+    }
     public static Result show() {
         indexModel = new IndexModel();
 

@@ -188,4 +188,7 @@
     @helper.form(action=routes.Application.createXml()){
         <input type="submit" name="complete" value="complete">
     }
+    @helper.form(action=routes.ResultPage.showAgain()){
+        <input type="submit" name="previous" value="previous">
+    }
 }

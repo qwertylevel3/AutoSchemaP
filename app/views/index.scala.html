@@ -6,6 +6,10 @@
 
     <div id="list">
         <h2>list...</h2>
+        @helper.form(action=routes.TreePage.show()){
+            <input type="submit" name="tree" value="choose Item">
+        }
+
          <table border="1">
             <tr>
                 <th>Ename</th>
@@ -39,7 +43,7 @@
                         <td>@item.path</td>
                     </tr>
                 }
-            	<input type="submit" name="send" value="Feed"/>
+            	<input type="submit" name="send" value="Next"/>
             }
         </table>
     </div>

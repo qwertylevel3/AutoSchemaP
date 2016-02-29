@@ -40,6 +40,9 @@
             	<input type="submit" name="send" value="Feed"/>
             }
         </table>
+        @helper.form(action=routes.IndexPage.showAgain()){
+            <input type="submit" name="previous" value="previous">
+        }
     </div>
 }
 

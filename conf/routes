@@ -15,10 +15,12 @@ GET     /tree/post                  controllers.TreePage.post()
 #index
 GET     /index                      controllers.IndexPage.show()
 GET     /index/post                 controllers.IndexPage.post()
+GET     /index/showAgain            controllers.IndexPage.showAgain()
 
 #result
 GET     /result                     controllers.ResultPage.show()
 GET     /result/post                controllers.ResultPage.post()
+GET     /result/showAgain           controllers.ResultPage.showAgain()
 
 #showDetail
 GET     /showDetail                 controllers.ShowDetailPage.show()

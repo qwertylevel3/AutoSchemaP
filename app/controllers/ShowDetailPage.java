@@ -33,36 +33,6 @@ public class ShowDetailPage extends Controller{
     public static Result show(){
         showDetailModel=new ShowDetailModel();
 
-        ShowDetailItem item1=new ShowDetailItem();
-        item1.name="111";
-        item1.path="/111/";
-
-        ShowDetailItem item2=new ShowDetailItem();
-        item2.name="2";
-        item2.path="222/";
-
-        ShowDetailItem item3=new ShowDetailItem();
-        item3.name="333";
-        item3.path="/333/";
-
-        ShowDetailItem item4=new ShowDetailItem();
-        item4.name="4";
-        item4.path="444/";
-
-        ShowDetailTable table1=new ShowDetailTable();
-        table1.tableName="table1";
-        table1.items.add(item1);
-        table1.items.add(item2);
-
-        ShowDetailTable table2=new ShowDetailTable();
-        table2.tableName="table2";
-        table2.items.add(item3);
-        table2.items.add(item4);
-        table2.items.add(item1);
-
-        showDetailModel.tables.add(table1);
-        showDetailModel.tables.add(table2);
-
         return ok(showDetail.render(showDetailModel));
 
     }
@@ -118,6 +88,7 @@ public class ShowDetailPage extends Controller{
     }
     public static Result addItem(){
         ShowDetailTable temptable=showDetailModel.tables.get(cur);
+        temptable.items.clear();
 
         for(String index:request().queryString().keySet()){
             if(!index.equals("send")){
@@ -171,11 +142,11 @@ public class ShowDetailPage extends Controller{
                     detail.appendChild(tableid);
 
                     Element name=doc.createElement("name");
-                    name.setTextContent(showDetailModel.tables.get(i).items.get(i).name);
+                    name.setTextContent(showDetailModel.tables.get(i).items.get(j).name);
                     detail.appendChild(name);
 
                     Element path=doc.createElement("path");
-                    path.setTextContent(showDetailModel.tables.get(i).items.get(i).path);
+                    path.setTextContent(showDetailModel.tables.get(i).items.get(j).path);
                     detail.appendChild(path);
                 }
 
