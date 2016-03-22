@@ -1,14 +1,15 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import models.IndexItem;
+import models.IndexModel;
+import models.XmlTreeNode;
+import play.mvc.Controller;
+import play.mvc.Result;
+import java.io.File;
 
-import views.html.*;
-import models.*;
-
-import java.io.*;
-import java.io.File.*;
-
+import views.html.index;
+import views.html.home;
+import views.html.debugView;
 
 
 public class Application extends Controller {
@@ -50,7 +51,7 @@ public class Application extends Controller {
     }
 
     public static void init(){
-        XsdAnalyser.getInstance().analyse("/home/qwertylevel3/2013-07-31_19_09_32.xsd");
+        XsdAnalyser.getInstance().analyse("C:\\Users\\Administrator\\asd\\2013-07-31_19_09_32.xsd");
 
         XmlTreeNode root=XsdAnalyser.getInstance().getTree();
 
@@ -58,15 +59,19 @@ public class Application extends Controller {
     }
 
     public static Result createXml(){
-        String prefix="/home/qwertylevel3/";
+        String prefix="C:\\Users\\Administrator\\asd\\";
         String fileName="testFile";
         new File(prefix+fileName).mkdirs();
 
+        String indexFilePath=prefix+fileName+"\\index.xml";
+        String resultFilePath=prefix+fileName+"\\result.xml";
+        String showDetailFilePath=prefix+fileName+"\\showDetail.xml";
 
-        IndexPage.createXml(prefix+fileName+"/index");
-        ResultPage.createXml(prefix+fileName+"/result");
-        ShowDetailPage.createXml(prefix+fileName+"/showDetail");
+        IndexPage.createXml(indexFilePath);
+        ResultPage.createXml(resultFilePath);
+        ShowDetailPage.createXml(showDetailFilePath);
 
         return ok(debugView.render("ok"));
     }
 }
+

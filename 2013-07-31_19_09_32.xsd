@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tab="http://www.hhu.edu.cn" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="Metadata">
+        <xs:sequence>
+			<xs:element name="imgBasicInfo" type="basicInfo" id="基本信息" minOccurs="0"  tab:tabNO="1" >
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的基本信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgReferenceInfo" type="referenceInfo" id="元数据参考信息" minOccurs="0" tab:tabNO="2">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的参考信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgFeatureCataloguingInfo" type="featureCataloguingInfo" id="要素分类信息" minOccurs="0" tab:tabNO="2">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的要素分类信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgArticulatedInfo" type="articulatedInfo" id="元数据挂接信息" minOccurs="0" tab:tabNO="2">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的挂接信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgConsultSystemInfo" type="consultSystemInfo" id="参照系统信息" minOccurs="0" tab:tabNO="3">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的参照系统信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgFieldDataInfo" type="fieldDataInfo" id="空间数据表示信息" minOccurs="0" tab:tabNO="4">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的空间数据表示信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgDataQualityInfo" type="dataQualityInfo" id="数据质量信息" minOccurs="0" tab:tabNO="5">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的数据质量信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgDataLineage" type="dataLineage" id="数据志信息" minOccurs="0" tab:tabNO="5">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的数据志信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="imgDataPublishInfo" type="dataPublishInfo" id="数据发行信息" minOccurs="0" tab:tabNO="5">
+                <xs:annotation>
+                    <xs:documentation>影像元数据信息</xs:documentation>
+                    <xs:documentation>影像元数据的数据发行信息</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="basicInfo">
+           <xs:sequence>
+				<xs:element name="DataSetSeriesName" type="xs:string" id="数据集系列名称" minOccurs="0" tab:myType="String" />
+				<xs:element name="DataSetCategories" type="xs:string" id="数据集类别" minOccurs="0" tab:myType="String" />
+				<xs:element name="idTitle" type="xs:string" id="图名" minOccurs="0" tab:myType="String" />
+				<xs:element name="MapNumber" type="xs:string" id="图号" minOccurs="0" tab:myType="String" />
+				<xs:element name="Version" type="xs:string" id="版本" minOccurs="0" tab:myType="String" />
+				<xs:element name="Abstract" type="xs:string" id="摘要" minOccurs="0" tab:myType="LongString" />
+				<xs:element name="onlineurl" type="xs:string" id="在线地址" minOccurs="0" tab:myType="LongString" />
+				<xs:element name="FileFormat" type="xs:string" id="文件格式" minOccurs="0" tab:myType="String" />
+				<xs:element name="PlottingScale" type="xs:string" id="比例尺" minOccurs="0" tab:myType="String" />
+				<xs:element name="SecurityLevel" type="xs:string" id="保密等级" minOccurs="0" tab:myType="String" />
+				<xs:element name="ProjectName" type="xs:string" id="项目名称" minOccurs="0" tab:myType="String" />
+				<xs:element name="ProjectType" type="xs:string" id="项目类型" minOccurs="0" tab:myType="String" />
+				<xs:element name="Drawer" type="xs:string" id="制图员" minOccurs="0" tab:myType="String" />
+				<xs:element name="UpdateDreawer" type="xs:string" id="制图更新人员" minOccurs="0" tab:myType="String" />
+				<xs:element name="Inspector" type="xs:string" id="检查员" minOccurs="0" tab:myType="String" />
+				<xs:element name="DataGenerateTime" type="xs:string" id="数据生成时间" minOccurs="0" tab:myType="Date" />
+				<xs:element name="SouthWestBorderX" type="xs:string" id="西南图廓角点x坐标" minOccurs="0" tab:myType="String" />
+				<xs:element name="SouthWestBorderY" type="xs:string" id="西南图廓角点y坐标" minOccurs="0" tab:myType="String" />
+				<xs:element name="NortheastBorderX" type="xs:string" id="东北图廓角点x坐标" minOccurs="0" tab:myType="String" />
+				<xs:element name="NortheastBorderY" type="xs:string" id="东北图廓角点y坐标" minOccurs="0" tab:myType="String" />
+				<xs:element name="WesternBoundaryLongitude" type="xs:string" id="西部边界经度" minOccurs="0" tab:myType="String" />
+				<xs:element name="SouthernLatitude" type="xs:string" id="南部边界纬度" minOccurs="0" tab:myType="String" />
+				<xs:element name="EasternLongitude" type="xs:string" id="东部边界经度" minOccurs="0" tab:myType="String" />
+				<xs:element name="NorthernLatitude" type="xs:string" id="北部边界纬度" minOccurs="0" tab:myType="String" />
+				<xs:element name="GeographicalName" type="xs:string" id="地理区域名称" minOccurs="0" tab:myType="String" />
+				<xs:element name="TimeRangeType" type="xs:string" id="时间范围类型" minOccurs="0" tab:myType="String" />
+				<xs:element name="StartTime" type="xs:string" id="起始时间" minOccurs="0" tab:myType="Date" />
+				<xs:element name="EndTime" type="xs:string" id="终止时间" minOccurs="0" tab:myType="Date" />
+				<xs:element name="Frequency" type="xs:string" id="维护和更新频率" minOccurs="0" tab:myType="String" />
+				<xs:element name="UpdateLevel" type="xs:string" id="数据更新等级" minOccurs="0" tab:myType="String" />
+				<xs:element name="UpdateReason" type="xs:string" id="更新原因" minOccurs="0" tab:myType="String" />
+				<xs:element name="Approval" type="xs:string" id="数据更新批准领导" minOccurs="0" tab:myType="String" />
+			</xs:sequence> 
+	</xs:complexType>
+	<xs:complexType name="referenceInfo">
+           <xs:sequence>
+				<xs:element name="Identification" type="xs:string" id="元数据标识" minOccurs="0" tab:myType="String" />
+				<xs:element name="Level" type="xs:string" id="元数据级别" minOccurs="0" tab:myType="String" />
+				<xs:element name="SecurityLevel" type="xs:string" id="元数据密级" minOccurs="0" tab:myType="String" />
+				<xs:element name="Department" type="xs:string" id="元数据负责单位" minOccurs="0" tab:myType="String" />
+				<xs:element name="Author" type="xs:string" id="元数据作者" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="featureCataloguingInfo">
+           <xs:sequence>
+				<xs:element name="Standards" type="xs:string" id="要素分类执行标准情况" minOccurs="0" tab:myType="String" />
+				<xs:element name="ClassifName" type="xs:string" id="要素分类方案名称" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="articulatedInfo">
+           <xs:sequence>
+				<xs:element name="LayerIdentification" type="xs:string" id="图层标识" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="consultSystemInfo">
+           <xs:sequence>
+				<xs:element name="PlaneCoordinate" type="xs:string" id="平面坐标系统" minOccurs="0" tab:myType="String" />
+				<xs:element name="VerticalCoordinate" type="xs:string" id="高程坐标系统" minOccurs="0" tab:myType="String" />
+				<xs:element name="CoordinateUnits" type="xs:string" id="坐标单位" minOccurs="0" tab:myType="String" />
+				<xs:element name="ProjectiveMode" type="xs:string" id="投影方式" minOccurs="0" tab:myType="String" />
+				<xs:element name="ZoningMode" type="xs:string" id="分带方式" minOccurs="0" tab:myType="String" />
+				<xs:element name="ZoneNumber" type="xs:string" id="带号" minOccurs="0" tab:myType="String" />
+				<xs:element name="LongRadius" type="xs:string" id="参考椭球体长半径" minOccurs="0" tab:myType="String" />
+				<xs:element name="ShortRadius" type="xs:string" id="参考椭球体短半径" minOccurs="0" tab:myType="String" />
+				<xs:element name="Oblateness" type="xs:string" id="参考椭球体扁率" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fieldDataInfo">
+           <xs:sequence>
+				<xs:element name="SpaceDataType" type="xs:string" id="空间数据类型" minOccurs="0" tab:myType="String" />
+				<xs:element name="TerrainType" type="xs:string" id="地形类型" minOccurs="0" tab:myType="String" />
+				<xs:element name="ImageType" type="xs:string" id="影像类型" minOccurs="0" tab:myType="String" />
+				<xs:element name="ImageColor" type="xs:string" id="影像色彩" minOccurs="0" tab:myType="String" />
+				<xs:element name="Quality" type="xs:string" id="航片质检情况" minOccurs="0" tab:myType="String" />
+				<xs:element name="FlightTime" type="xs:string" id="航飞时间" minOccurs="0" tab:myType="Date" />
+				<xs:element name="FlightAltitude" type="xs:string" id="航飞高度" minOccurs="0" tab:myType="String" />
+				<xs:element name="StripNumber" type="xs:string" id="航带数" minOccurs="0" tab:myType="String" />
+				<xs:element name="Overlap" type="xs:string" id="航向重叠度" minOccurs="0" tab:myType="String" />
+				<xs:element name="OverlapDegree" type="xs:string" id="旁向重叠度" minOccurs="0" tab:myType="String" />
+				<xs:element name="CameraParams" type="xs:string" id="相机参数" minOccurs="0" tab:myType="String" />
+				<xs:element name="PhotographicScale" type="xs:string" id="摄影比例尺" minOccurs="0" tab:myType="String" />
+				<xs:element name="ScanningResolution" type="xs:string" id="扫描分辨率" minOccurs="0" tab:myType="String" />
+				<xs:element name="MappingResolution" type="xs:string" id="成图分辨率" minOccurs="0" tab:myType="String" />
+				<xs:element name="ImageGridSpacing" type="xs:string" id="影像格网间隔" minOccurs="0" tab:myType="String" />
+				<xs:element name="PatternNumber" type="xs:string" id="模型编号" minOccurs="0" tab:myType="String" />
+				<xs:element name="MainImage" type="xs:string" id="主影像" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dataQualityInfo">
+           <xs:sequence>
+				<xs:element name="DataQualitySpecifications" type="xs:string" id="数据质量说明" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dataLineage">
+           <xs:sequence>
+				<xs:element name="DataLog" type="xs:string" id="数据志" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dataPublishInfo">
+           <xs:sequence>
+				<xs:element name="ResponsibleDepartment" type="xs:string" id="负责单位名称" minOccurs="0" tab:myType="String" />
+				<xs:element name="DepartmentEffect" type="xs:string" id="负责单位作用" minOccurs="0" tab:myType="String" />
+				<xs:element name="Website" type="xs:string" id="网址" minOccurs="0" tab:myType="String" />
+				<xs:element name="Email" type="xs:string" id="电子邮件地址" minOccurs="0" tab:myType="Email" />
+				<xs:element name="TelNum" type="xs:string" id="电话号码" minOccurs="0" tab:myType="Phone" />
+				<xs:element name="FaxNumber" type="xs:string" id="传真号码" minOccurs="0" tab:myType="Phone" />
+				<xs:element name="ReleaseFormat" type="xs:string" id="发行格式" minOccurs="0" tab:myType="String" />
+				<xs:element name="DataCount" type="xs:string" id="数据量" minOccurs="0" tab:myType="String" />
+			</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MetaSchema" type="Metadata" />
+</xs:schema>
