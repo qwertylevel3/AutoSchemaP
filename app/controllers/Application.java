@@ -51,7 +51,7 @@ public class Application extends Controller {
     }
 
     public static void init(){
-        XsdAnalyser.getInstance().analyse("C:\\Users\\Administrator\\asd\\2013-07-31_19_09_32.xsd");
+        XsdAnalyser.getInstance().analyse(Config.getInstance().getXsdFilePath());
 
         XmlTreeNode root=XsdAnalyser.getInstance().getTree();
 
@@ -59,17 +59,11 @@ public class Application extends Controller {
     }
 
     public static Result createXml(){
-        String prefix="C:\\Users\\Administrator\\asd\\";
-        String fileName="testFile";
-        new File(prefix+fileName).mkdirs();
+        new File(Config.getInstance().getOutputDirPath()).mkdirs();
 
-        String indexFilePath=prefix+fileName+"\\index.xml";
-        String resultFilePath=prefix+fileName+"\\result.xml";
-        String showDetailFilePath=prefix+fileName+"\\showDetail.xml";
-
-        IndexPage.createXml(indexFilePath);
-        ResultPage.createXml(resultFilePath);
-        ShowDetailPage.createXml(showDetailFilePath);
+        IndexPage.createXml(Config.getInstance().getIndexFilePath());
+        ResultPage.createXml(Config.getInstance().getResultFilePath());
+        ShowDetailPage.createXml(Config.getInstance().getShowDetailFilePath());
 
         return ok(debugView.render("ok"));
     }

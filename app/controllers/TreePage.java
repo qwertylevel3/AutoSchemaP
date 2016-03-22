@@ -18,7 +18,7 @@ public class TreePage extends Controller{
     static Form<TreeForm> treeForm=Form.form(TreeForm.class);
 
     public static Result show(){
-        XsdAnalyser.getInstance().analyse("C:\\Users\\Administrator\\asd\\2013-07-31_19_09_32.xsd");
+        XsdAnalyser.getInstance().analyse(Config.getInstance().getXsdFilePath());
         //XsdAnalyser.getInstance().debug();
         return ok(tree.render(XsdAnalyser.getInstance(),treeForm));
     }
