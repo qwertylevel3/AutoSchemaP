@@ -7,11 +7,11 @@
             <!--
             body,div,ul,li{
             padding:0;
-            text-align:center;
+
             }
             body{
             font:12px "宋体";
-            text-align:center;
+
             }
             a:link{
             color:#00F;
@@ -54,7 +54,7 @@
             display:block;
             cursor:pointer;
             width:114px;
-            text-align:center;
+
             color:#949694;
             font-weight:bold;
             }
@@ -77,9 +77,11 @@
             border:1px solid #A8C29F;
             border-top:none;
             height:181px;
-            text-align:center;
+
             padding-top:8px;
             }
+            #Tab1{float:left;}
+            #over{position:absolute;top:300px;}
             -->
         </style>
         <script>
@@ -102,6 +104,16 @@
             <input type="submit" name="delete" value="删除表">
         }
     </div>
+    <div id="over">
+        @helper.form(action=routes.Application.createXml()){
+        <input type="submit" name="complete" value="完成">
+        }
+        <!--
+        @helper.form(action=routes.ResultPage.showAgain()){
+        <input type="submit" name="previous" value="上一步">
+        }
+        -->
+    </div>
     <div id="tables">
         <div id="Tab1">
             <div class="Menubox">
@@ -110,11 +122,11 @@
                     @for(i <- 0 until showDetailModel.tables.size()){
                         @if(i==0){
                             <li id="one@(i+1)" onClick="setTab('one',@i+1,@showDetailModel.tables.size())" class="hover">
-                                @showDetailModel.tables.get(i).tableName;
+                                @showDetailModel.tables.get(i).tableName
                             </li>
                         }else{
                             <li id="one@(i+1)" onClick="setTab('one',@i+1,@showDetailModel.tables.size())" >
-                                @showDetailModel.tables.get(i).tableName;
+                                @showDetailModel.tables.get(i).tableName
                             </li>
                         }
                     }
@@ -127,7 +139,7 @@
                     @if(i==0){
                         <div id="con_one_@(i+1)" class="hover">
                         @helper.form(action=routes.ShowDetailPage.chooseItem()){
-                            <input type="submit" name="@i" value="chooseItem">
+                            <input type="submit" name="@i" value="选择表项">
                         }
                         <table border="1">
                             <tr>
@@ -153,7 +165,7 @@
                     }else{
                         <div id="con_one_@(i+1)" style="display:none">
                         @helper.form(action=routes.ShowDetailPage.chooseItem()){
-                            <input type="submit" name="@i" value="chooseItem">
+                            <input type="submit" name="@i" value="选择表项">
                         }
                         <table border="1">
                             <tr>
@@ -185,10 +197,6 @@
 
         </div>
     </div>
-    @helper.form(action=routes.Application.createXml()){
-        <input type="submit" name="complete" value="完成">
-    }
-    @helper.form(action=routes.ResultPage.showAgain()){
-        <input type="submit" name="previous" value="上一步">
-    }
+
+
 }
