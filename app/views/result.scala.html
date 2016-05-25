@@ -2,13 +2,12 @@
 
 @main("result"){
 
-    <h1>result page</h1>
+    <h1>配置result</h1>
 
     <div id="list">
-        <h2>list...</h2>
          <table border="1">
             <tr>
-                <th>choose?</th>
+                <th>    </th>
                 <th>indexName</th>
                 <th>showName</th>
                 <th>showDetail</th>
@@ -21,10 +20,10 @@
                             <input type="checkbox" name=@item.treeNodeIndex>
                         </td>
                         <td>
-                            @item.indexName;
+                            @item.indexName
                         </td>
                         <td>
-                            @item.showName;
+                            @item.showName
                         </td>
                         <td>
                             <select name="select">
@@ -37,11 +36,11 @@
                         </td>
                     </tr>
                 }
-            	<input type="submit" name="send" value="Feed"/>
+            	<input type="submit" name="send" value="下一步"/>
             }
         </table>
         @helper.form(action=routes.IndexPage.showAgain()){
-            <input type="submit" name="previous" value="previous">
+            <input type="submit" name="previous" value="上一步">
         }
     </div>
 }

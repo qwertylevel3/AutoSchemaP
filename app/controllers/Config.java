@@ -33,7 +33,7 @@ public class Config {
     }
 
 
-    private String xsdFilePath="C:\\Users\\Administrator\\asd\\2013-07-31_19_09_32.xsd";
+    private String xsdFilePath="C:\\Users\\Administrator\\asd\\easy.xsd";
     private String indexFilePath="C:\\Users\\Administrator\\asd\\output\\index.xml";
     private String resultFilePath="C:\\Users\\Administrator\\asd\\output\\result.xml";
     private String showDetailFilePath="C:\\Users\\Administrator\\asd\\output\\showDetail.xml";

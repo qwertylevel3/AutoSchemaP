@@ -2,7 +2,7 @@
 
 @main("showDetail"){
     <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <style type="text/css">
             <!--
             body,div,ul,li{
@@ -10,7 +10,7 @@
             text-align:center;
             }
             body{
-            font:12px "����";
+            font:12px "宋体";
             text-align:center;
             }
             a:link{
@@ -26,19 +26,19 @@
             text-decoration:underline;
             }
             ul{ list-style:none;}
-            /*ѡ�1*/
+            /*选项卡1*/
             #Tab1{
             width:460px;
             margin:0px;
             padding:0px;
             margin:0 auto;}
-            /*ѡ�2*/
+            /*选项卡2*/
             #Tab2{
             width:576px;
             margin:0px;
             padding:0px;
             margin:0 auto;}
-            /*�˵�class*/
+            /*菜单class*/
             .Menubox {
             width:100%;
             background:url(http://www.jb51.net/upload/small/20079299441652.gif);
@@ -94,12 +94,12 @@
         </script>
     </head>
 
-    <h1>showdetail page</h1>
+    <h1>配置showDetail</h1>
     <div id="addTable">
         @helper.form(action=routes.ShowDetailPage.addTable()){
             <input type="text" name="tableName">
-            <input type="submit" name="add" value="add">
-            <input type="submit" name="delete" value="delete">
+            <input type="submit" name="add" value="添加表">
+            <input type="submit" name="delete" value="删除表">
         }
     </div>
     <div id="tables">
@@ -186,9 +186,9 @@
         </div>
     </div>
     @helper.form(action=routes.Application.createXml()){
-        <input type="submit" name="complete" value="complete">
+        <input type="submit" name="complete" value="完成">
     }
     @helper.form(action=routes.ResultPage.showAgain()){
-        <input type="submit" name="previous" value="previous">
+        <input type="submit" name="previous" value="上一步">
     }
 }

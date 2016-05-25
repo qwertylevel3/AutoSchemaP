@@ -2,22 +2,21 @@
 
 @main("index") {
 
-    <h1>index page</h1>
+    <h1>配置index</h1>
 
     <div id="list">
-        <h2>list...</h2>
         @helper.form(action=routes.TreePage.show()){
-            <input type="submit" name="tree" value="choose Item">
+            <input type="submit" name="tree" value="选择index项">
         }
 
          <table border="1">
             <tr>
-                <th>Ename</th>
-                <th>Cname</th>
-                <th>type</th>
+                <th>英文名</th>
+                <th>中文名</th>
+                <th>类型</th>
                 <th>showName</th>
-                <th>participle</th>
-                <th>path</th>
+                <th>是否分词</th>
+                <th>路径</th>
             </tr>
             @helper.form(action=routes.IndexPage.post()){
 
@@ -43,7 +42,7 @@
                         <td>@item.path</td>
                     </tr>
                 }
-            	<input type="submit" name="send" value="Next"/>
+            	<input type="submit" name="send" value="下一步"/>
             }
         </table>
     </div>
